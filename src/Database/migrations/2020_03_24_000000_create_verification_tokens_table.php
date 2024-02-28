@@ -17,7 +17,7 @@ class CreateVerificationTokensTable extends Migration
             $table->increments('id');
             $table->string('token')->index();
             $table->string('mobile')->index();
-            $table->boolean('used')->default(false);cl
+            $table->boolean('used')->default(false);
             $table->timestamps();
         });
     }
