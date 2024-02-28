@@ -42,7 +42,7 @@ class ServiceProvider extends SupportServiceProvider
         $this->publishes([
             __DIR__ . '/Config/mvaliolahi_auth.php' => config_path('auth_mobile.php'),
             __DIR__ . '/Resources/lang' => resource_path("lang/mvaliolahi/{$this->packageAlias}"),
-            __DIR__ . '/Resources/views' => resource_path("views/vendor/mvaliolahi/{$this->packageAlias}"),
+            __DIR__ . '/Resources/views' => resource_path("views/vendor/{$this->packageAlias}"),
         ]);
 
         $this->publishes([
