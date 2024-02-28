@@ -40,7 +40,7 @@ class ServiceProvider extends SupportServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/Config/mvaliolahi_auth.php', $this->packageAlias);
 
         $this->publishes([
-            __DIR__ . '/Config/mvaliolahi_auth.php' => config_path('mvaliolahi_auth.php'),
+            __DIR__ . '/Config/mvaliolahi_auth.php' => config_path('auth_mobile.php'),
             __DIR__ . '/Resources/lang' => resource_path("lang/mvaliolahi/{$this->packageAlias}"),
             __DIR__ . '/Resources/views' => resource_path("views/vendor/mvaliolahi/{$this->packageAlias}"),
         ]);
