@@ -12,7 +12,7 @@
         {{-- Slogan --}}
         <div class="my-10 text-white md:px-10">
             <h1 class="text-xl">
-                {{ config('mvaliolahi_auth.slogan') }}
+                {{ config('auth_mobile.slogan') }}
             </h1>
         </div>
 
@@ -117,7 +117,7 @@
     }, 1000);
 };
 
-startTimer({{config('mvaliolahi_auth.token_expire')}} * 1, document.querySelector('span#timer'));
+startTimer({{config('auth_mobile.token_expire')}} * 1, document.querySelector('span#timer'));
 
 </script>
 @endpush

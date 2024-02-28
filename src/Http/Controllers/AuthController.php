@@ -99,7 +99,7 @@ class AuthController extends Controller
         }
 
         // 3. Check Token Expire
-        if (Carbon::parse($token->created_at)->addSeconds(config('mvaliolahi_auth.token_expire'))->isPast()) {
+        if (Carbon::parse($token->created_at)->addSeconds(config('auth_mobile.token_expire'))->isPast()) {
             return redirect()->route('auth.verify.form', ['mobile' => $request->mobile])->withErrors([
                 'token' => trans('auth::messages.token_expired')
             ]);
@@ -118,7 +118,7 @@ class AuthController extends Controller
         }
 
         // 7. redirect to specified url in config (this case will not be triggered if intended session was set).
-        return redirect(config('mvaliolahi_auth.redirect_to'));
+        return redirect(config('auth_mobile.redirect_to'));
     }
 
 

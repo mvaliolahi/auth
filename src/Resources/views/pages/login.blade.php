@@ -12,7 +12,7 @@
         {{-- Slogan --}}
         <div class="my-10 text-white md:px-10">
             <h1 class="text-xl">
-                {{ config('mvaliolahi_auth.slogan') }}
+                {{ config('auth_mobile.slogan') }}
             </h1>
         </div>
 
