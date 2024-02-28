@@ -26,7 +26,7 @@ class AuthController extends Controller
         // store last url intended.
         session(['url.intended' => url()->previous()]);
 
-        return view('auth::auth.login');
+        return view('auth::pages.login');
     }
 
     /**
@@ -64,7 +64,7 @@ class AuthController extends Controller
      */
     public function verifyTokenForm($mobile)
     {
-        return view('auth::auth.verify', [
+        return view('auth::pages.verify', [
             'mobile' => $mobile,
         ]);
     }
@@ -87,21 +87,21 @@ class AuthController extends Controller
         // 1. Token not match or user not exists.
         if (is_null($token)) {
             return redirect()->route('auth.verify.form', ['mobile' => $request->mobile])->withErrors([
-                'token' => trans('auth::auth.token_not_match')
+                'token' => trans('auth::messages.token_not_match')
             ]);
         }
 
         // 2. Token used before.
         if ($token->used) {
             return redirect()->route('auth.verify.form', ['mobile' => $request->mobile])->withErrors([
-                'token' => trans('auth::auth.token_used')
+                'token' => trans('auth::messages.token_used')
             ]);
         }
 
         // 3. Check Token Expire
         if (Carbon::parse($token->created_at)->addSeconds(config('mvaliolahi_auth.token_expire'))->isPast()) {
             return redirect()->route('auth.verify.form', ['mobile' => $request->mobile])->withErrors([
-                'token' => trans('auth::auth.token_expired')
+                'token' => trans('auth::messages.token_expired')
             ]);
         }
 

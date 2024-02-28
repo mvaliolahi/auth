@@ -1,6 +1,6 @@
 @extends('auth::layouts.app')
 
-@section('title', 'Login')
+@section('title', trans('auth::messages.login'))
 
 @section('content')
 
@@ -29,12 +29,12 @@
         <div class="text-right">
             {{-- Title --}}
             <div class="text-3xl ">
-                <h1>{{trans('auth::auth.title')}}</h1>
+                <h1>{{trans('auth::messages.title')}}</h1>
             </div>
 
             {{-- Subtitle --}}
             <div class="text-xl my-4">
-                <h1>{{trans('auth::auth.subtitle')}}</h1>
+                <h1>{{trans('auth::messages.subtitle')}}</h1>
             </div>
 
             {{-- Form --}}
@@ -44,7 +44,7 @@
                     {{-- Mobile --}}
                     <div>
                         <input name="mobile" class="border  w-full rounded py-3 px-2 hover:none" type="text"
-                            placeholder="{{trans('auth::auth.mobile')}}" />
+                            placeholder="{{trans('auth::messages.mobile')}}" />
                         @if($errors->has('mobile'))
                         <span class="flex justify-center items-center w-full text-red-500 mt-2">
                             {{ $errors->first('mobile') }}
@@ -56,7 +56,7 @@
                     <div class="mt-5">
                         <button type="submit"
                             class="bg-blue-400 text-white w-full py-3 rounded-full    hover:bg-blue-300">
-                            {{trans('auth::auth.continue')}}
+                            {{trans('auth::messages.continue')}}
                         </button>
                     </div>
                 </form>

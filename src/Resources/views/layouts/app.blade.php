@@ -8,21 +8,8 @@
     <title> @yield('title')</title>
 
     <!-- Styles -->
-    {{-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <style>
-        @font-face {
-            font-family: "BYekan";
-            src: url("/vendor/mvaliolahi/auth/fonts/BYekan.eot");
-            src: local("BYekan"), url("/vendor/mvaliolahi/auth/fonts/BYekan.woff") format("woff"),
-                url("/vendor/mvaliolahi/auth/fonts/BYekan.ttf") format("truetype");
-        }
-
-        body {
-            font-family: "BYekan";
-        }
-    </style>
+    @stack('css')
 
 </head>
 

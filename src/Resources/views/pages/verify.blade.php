@@ -1,6 +1,6 @@
 @extends('auth::layouts.app')
 
-@section('title', 'Verify')
+@section('title', trans('auth::messages.verify'))
 
 @section('content')
 
@@ -29,12 +29,12 @@
         <div class="text-right">
             {{-- Title --}}
             <div class="text-3xl ">
-                <h1>{{trans('auth::auth.verification_title', ['title' => $mobile])}}</h1>
+                <h1>{{trans('messages::auth.verification_title', ['title' => $mobile])}}</h1>
             </div>
 
             {{-- Subtitle --}}
             <div class="text-xl my-4">
-                <h1>{{trans('auth::auth.verification_subtitle')}}</h1>
+                <h1>{{trans('messages::auth.verification_subtitle')}}</h1>
             </div>
 
             {{-- Vefiry Form --}}
@@ -44,7 +44,7 @@
                     {{-- Token --}}
                     <div>
                         <input name="token" class="border  w-full rounded py-3 px-2 hover:none" type="text"
-                            placeholder="{{trans('auth::auth.token')}}" />
+                            placeholder="{{trans('messages::auth.token')}}" />
                         @if($errors->has('token'))
                         <span class="flex justify-center items-center w-full text-red-500 mt-2">
                             {{ $errors->first('token') }}
@@ -61,7 +61,7 @@
                     <div class="mt-5">
                         <button type="submit"
                             class="bg-blue-400 text-white w-full py-3 rounded-full    hover:bg-blue-300">
-                            {{trans('auth::auth.continue')}}
+                            {{trans('messages::auth.continue')}}
                         </button>
                     </div>
                 </form>
@@ -77,11 +77,11 @@
 
                         <div class="text-gray-700">
                             <h1 class="text-lg">
-                                <span id='timer' class="text-blue-400">00:00</span> 
-                                @lang('auth::auth.did not received the code')
+                                <span id='timer' class="text-blue-400">00:00</span>
+                                @lang('auth::messages.did not received the code')
                             </h1>
                             <button id="resendButton" type="submit" class="invisible text-blue-400 cursor-pointer">
-                                @lang('auth::auth.resend')
+                                @lang('auth::messages.resend')
                             </button>
                         </div>
                     </form>
@@ -98,7 +98,7 @@
 
 @push('scripts')
 <script>
- 
+
  function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
     var interval =  setInterval(function () {

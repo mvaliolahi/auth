@@ -1,6 +1,9 @@
 <?php
 
 return [
+    "login" => 'Login',
+    "register" => 'Register',
+    "verify" => "Verify",
     'title' => 'Login or Register',
     'subtitle' => 'For login or register enter your mobile below please.',
     'mobile' => 'Mobile',
