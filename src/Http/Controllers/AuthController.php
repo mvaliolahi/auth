@@ -111,14 +111,21 @@ class AuthController extends Controller
         // 5. Token verified, User should be login and redirect.
         Auth::login($token->user);
 
+        if (config('auth_mobile.redirect_to')) {
+            return redirect(config('auth_mobile.redirect_to'));
+        }
+
+        if (config('auth_mobile.redirect_route')) {
+            return redirect()->route(config('auth_mobile.redirect_route'));
+        }
+
         // 6. redirect to "intended", last url before attempt to login.
         if ($intended = session("url.intended")) {
             session()->forget("url.intended");
             return redirect($intended);
         }
 
-        // 7. redirect to specified url in config (this case will not be triggered if intended session was set).
-        return redirect(config('auth_mobile.redirect_to'));
+        return redirect('/');
     }
 
 
