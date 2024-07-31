@@ -5,7 +5,6 @@ namespace Mvaliolahi\Auth\Models;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Mvaliolahi\Auth\Helpers\UniqueId\UniqueId;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Mvaliolahi\XPanel\Models\Address;
 
 class User extends Authenticatable
 {
@@ -31,8 +30,11 @@ class User extends Authenticatable
 
     public function generateVerificationToken()
     {
+        // If the mobile defined as test number, token must be 12345!
+        $isTest = collect(config('auth_mobile.test_numbers'))->contains($this->mobile);
+
         return $this->verificationTokens()->create([
-            'token' => UniqueId::makeDigit(5),
+            'token' => UniqueId::makeDigit(5, $isTest),
         ]);
     }
 }

@@ -21,9 +21,9 @@ class UniqueId
      * @param int $length
      * @return int
      */
-    public static function makeDigit($length)
+    public static function makeDigit($length, $isTest = false)
     {
-        if (!app()->environment('production') || config('auth_mobile.testing') == true) {
+        if (!app()->environment('production') || config('auth_mobile.testing') == true || $isTest) {
             return "12345";
         }
 
