@@ -17,10 +17,6 @@ class AuthController extends Controller
      */
     public function loginForm()
     {
-        if ($rules = config('auth_mobile.login_validations')) {
-            $this->validate(request(), $rules);
-        }
-
         if (auth()->check()) {
             return back();
         }
@@ -36,9 +32,9 @@ class AuthController extends Controller
      */
     public function sendToken()
     {
-        $this->validate($request = request(), [
-            'mobile' => 'required|numeric|digits:11',
-        ]);
+        $rules = [...config('auth_mobile.login_validations'), 'mobile' => 'required|exists:users,mobile'];
+
+        $this->validate($request = request(), $rules);
 
         // 1. Register user if not exists
         try {
