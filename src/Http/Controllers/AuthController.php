@@ -4,10 +4,8 @@ namespace Mvaliolahi\Auth\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use Mvaliolahi\Auth\Helpers\UniqueId\UniqueId;
 use Mvaliolahi\Auth\Jobs\SendSMSJob;
 use Mvaliolahi\Auth\Models\User;
 use Mvaliolahi\Auth\Models\VerificationToken;
@@ -19,6 +17,10 @@ class AuthController extends Controller
      */
     public function loginForm()
     {
+        if ($rules = config('auth_mobile.login_validations')) {
+            $this->validate(request(), $rules);
+        }
+
         if (auth()->check()) {
             return back();
         }
@@ -64,6 +66,10 @@ class AuthController extends Controller
      */
     public function verifyTokenForm($mobile)
     {
+        if ($rules = config('auth_mobile.verify_validations')) {
+            $this->validate(request(), $rules);
+        }
+
         return view('auth::pages.verify', [
             'mobile' => $mobile,
         ]);
