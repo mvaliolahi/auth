@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'slogan' => env('AUTH_SLOGAN', 'Authentication'),
+    'slogan'       => env('AUTH_SLOGAN', 'Authentication'),
 
-    'testing'    => false,
+    'testing'      => false,
     'test_numbers' => [],
 
     # If redirect_to sets to null Then use redirect_route
@@ -13,4 +13,8 @@ return [
 
     # second
     'token_expire' => 60,
+
+    'login_validations'  => [],
+    'verify_validations' => [],
+
 ];
