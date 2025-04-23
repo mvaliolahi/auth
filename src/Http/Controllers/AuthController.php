@@ -62,10 +62,6 @@ class AuthController extends Controller
      */
     public function verifyTokenForm($mobile)
     {
-        if ($rules = config('auth_mobile.verify_validations')) {
-            $this->validate(request(), $rules);
-        }
-
         return view('auth::pages.verify', [
             'mobile' => $mobile,
         ]);
@@ -76,10 +72,19 @@ class AuthController extends Controller
      */
     public function verify()
     {
-        $this->validate($request = request(), [
+        $rules = [
+            ...config('auth_mobile.verify_validations'),
+            'mobile' => 'required|exists:users,mobile',
             'token' => 'required',
-            'mobile' => 'required|exists:users,mobile'
-        ]);
+        ];
+
+        $this->validate($request = request(), $rules);
+
+        // Run Middlewares
+        $middlewares = config('auth_mobile.verify_before_closures');
+        foreach ($middlewares as $middleware) {
+            call_user_func($middleware, $request);
+        }
 
         $token = VerificationToken::where('mobile', $request->mobile)
             ->where('token', $request->token)
