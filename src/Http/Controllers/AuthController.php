@@ -32,7 +32,13 @@ class AuthController extends Controller
      */
     public function sendToken()
     {
-        $rules = [...config('auth_mobile.login_validations'), 'mobile' => 'required|exists:users,mobile'];
+        $rules = config('auth_mobile.login_validations');
+        $callbacks =[];
+        foreach ($rules as $rule) {
+            $callbacks[] =  new $rule();
+        }
+
+        $rules = [...$callbacks];
 
         $this->validate($request = request(), $rules);
 
@@ -72,8 +78,15 @@ class AuthController extends Controller
      */
     public function verify()
     {
+        $rules = config('auth_mobile.verify_validations');
+        $callbacks =[];
+        foreach ($rules as $rule) {
+            $callbacks[] =  new $rule();
+        }
+
+
         $rules = [
-            ...config('auth_mobile.verify_validations'),
+            ...$callbacks,
             'mobile' => 'required|exists:users,mobile',
             'token' => 'required',
         ];
