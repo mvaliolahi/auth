@@ -32,13 +32,7 @@ class AuthController extends Controller
      */
     public function sendToken()
     {
-        $rules = config('auth_mobile.login_validations');
-        $callbacks =[];
-        foreach ($rules as $rule) {
-            $callbacks[] =  new $rule();
-        }
-
-        $rules = [...$callbacks];
+        $rules = [...config('auth_mobile.login_validations')];
 
         $this->validate($request = request(), $rules);
 
@@ -78,15 +72,8 @@ class AuthController extends Controller
      */
     public function verify()
     {
-        $rules = config('auth_mobile.verify_validations');
-        $callbacks =[];
-        foreach ($rules as $rule) {
-            $callbacks[] =  new $rule();
-        }
-
-
         $rules = [
-            ...$callbacks,
+            ...config('auth_mobile.verify_validations'),
             'mobile' => 'required|exists:users,mobile',
             'token' => 'required',
         ];
@@ -96,7 +83,8 @@ class AuthController extends Controller
         // Run Middlewares
         $middlewares = config('auth_mobile.verify_before_closures');
         foreach ($middlewares as $middleware) {
-            call_user_func($middleware, $request);
+            $middleware =  new $middleware();
+            $middleware->handle($request);
         }
 
         $token = VerificationToken::where('mobile', $request->mobile)
