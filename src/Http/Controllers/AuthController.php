@@ -45,6 +45,13 @@ class AuthController extends Controller
             ]);
         }
 
+        // Run Middlewares
+        $middlewares = config('auth_mobile.send_token_before_closures');
+        foreach ($middlewares as $middleware) {
+            $middleware =  new $middleware();
+            $middleware->handle($request);
+        }
+
         // 2. Generate Verification Token For User.
         // 3. send token to mobile.
         $token = $user->generateVerificationToken()->token;

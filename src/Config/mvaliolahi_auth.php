@@ -17,5 +17,6 @@ return [
     'login_validations'  => [],
     'verify_validations' => [],
     'verify_before_closures' => [],
+    'send_token_before_closures' => [],
 
 ];
