@@ -35,9 +35,9 @@ class User extends Authenticatable
         $isTest = collect(config('auth_mobile.test_numbers'))->contains($this->mobile);
 
         // if user has an unused token and it's not expired , then return it
-        $token = $this->verificationToken();
-        $isExpired = Carbon::parse($token->created_at)->addSeconds(config('auth_mobile.token_expire'))->isPast();
-        if ($token && !$token->used && !$isExpired) {
+        $token = $this->verificationTokens()->latest()->first();
+        $isValid = $token && !Carbon::parse($token->created_at)->addSeconds(config('auth_mobile.token_expire'))->isPast();
+        if (!$token->used && $isValid) {
             return $token;
         }
 
